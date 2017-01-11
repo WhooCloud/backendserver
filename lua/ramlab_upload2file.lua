@@ -52,7 +52,7 @@ function handle_uploading()
             end
             local md5_sum = md5:final()
             md5:reset()
-            ngx.log(ngx.ERR, "md5:", str.to_hex(md5_sum))
+            ngx.log(ngx.INFO, "md5:", str.to_hex(md5_sum))
             ngx.say("md5:", str.to_hex(md5_sum))
         elseif typ == "eof" then
             break
@@ -61,7 +61,7 @@ function handle_uploading()
         end
     end
     if file_name then
-        return dst_dir .. "/".. file_name
+        return dst_dir .. "/".. file_name 
     else
         return "filename not get"
     end
@@ -70,4 +70,5 @@ end
 
 local t1 = os.clock()
 handle_uploading()
-ngx.say(os.clock()-t1)
+ngx.say("Backendserver costs: ".. os.clock()-t1)
+ngx.say("From Webserver1")
